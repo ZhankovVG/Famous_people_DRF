@@ -1,7 +1,7 @@
 from rest_framework import viewsets, generics
 from .models import Men
 from .serializers import MenSerializer
-from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser, IsAuthenticated
 from .permissions import IsAdminOrReadOnly, IsOwnerOrReadOnly
 
 
@@ -18,7 +18,7 @@ class MenAPIList(generics.ListCreateAPIView):
 class MenAPIUpdate(generics.RetrieveUpdateAPIView):
     queryset = Men.objects.all()
     serializer_class = MenSerializer
-    permission_classes = (IsOwnerOrReadOnly, )
+    permission_classes = (IsAuthenticated, )
     
     
 class MenAPIDestroy(generics.RetrieveDestroyAPIView):
